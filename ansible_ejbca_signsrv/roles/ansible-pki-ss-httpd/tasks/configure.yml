@@ -38,24 +38,24 @@
       inventory_hostname in groups['eeSignServers'] or
       inventory_hostname in groups['ceSignServers']
 
-- name: Configure Firewalld
-  block:
-    - name: Open http port
-      firewalld:
-        service: 'http'
-        permanent: yes
-        immediate: yes
-        state: enabled
+# - name: Configure Firewalld
+#  block:
+#    - name: Open http port
+#      firewalld:
+#        service: 'http'
+#        permanent: yes
+#        immediate: yes
+#        state: enabled
 
-    - name: Open https port
-      firewalld:
-        service: 'https'
-        permanent: yes
-        immediate: yes
-        state: enabled
+#    - name: Open https port
+#      firewalld:
+#        service: 'https'
+#        permanent: yes
+#        immediate: yes
+#        state: enabled
 
-  tags: reverse-proxy
-  when: enable_firewalld_for_httpd|bool
+#  tags: reverse-proxy
+#  when: enable_firewalld_for_httpd|bool
 
 - name: Configure PKI HTTPD conf files
   block:

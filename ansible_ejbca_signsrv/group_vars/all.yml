@@ -4,12 +4,12 @@
 #ansible_python_interpreter: /usr/bin/python3
 
 # Configure the Orgnaization variables used for templating DN's and FQDN's
-organizationName: Solitude
+organizationName: Keyfactor
 organizationNameShort: "{{ organizationName }}"
 organizationNameCRL: "{{ organizationName }}"
-organizationDomainName: solitude.skyrim
+organizationDomainName: keyfactoriot.com
 countryName: US
-superAdminCn: "Skyrim-Keyfactor-SA"
+superAdminCn: "Keyfactor-SA"
 sharedVarsLocation: ~/ansible/ansibleCacheDir
 
 # Deployment locations for all the servers

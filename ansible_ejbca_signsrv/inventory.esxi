@@ -11,7 +11,7 @@ all:
     eeCaServers:
       hosts:
         ca01:
-          ansible_host: 20.231.40.159
+          ansible_host: 10.10.12.14
           ansible_user: keyfactor
     ejbcaCaAddNodes:
       hosts:
@@ -38,17 +38,17 @@ all:
     eeSubCaServers:
       hosts:
         subca01:
-          ansible_host: 20.231.40.159
+          ansible_host: 10.10.12.14
           ansible_user: keyfactor
     eeRaServers:
       hosts:
         ra01:
-          ansible_host: 20.231.40.159
+          ansible_host: 10.10.12.14
           ansible_user: keyfactor
     eeVaServers:
       hosts:
         va01:
-          ansible_host: 20.231.40.159
+          ansible_host: 10.10.12.14
           ansible_user: keyfactor
     eeSignServers:
       hosts:
@@ -59,11 +59,11 @@ all:
     dbServers:
       hosts:
         to-ca.keyfactoriot.com:
-          ansible_host: 20.231.40.159
+          ansible_host: 10.10.12.14
     vaSigners:
       hosts:
         va01:
-          ansible_host: 20.231.40.159
+          ansible_host: 10.10.12.14
           ansible_user: keyfactor
     ceServers:
       hosts:
@@ -74,12 +74,12 @@ all:
     pkiTlsCerts:
       hosts:
         pkiTlsEnrollmentCA:
-          ansible_host: 20.231.40.159
+          ansible_host: 10.10.12.14
           ansible_user: keyfactor
     pkiCsrCerts:
       hosts:
         pkiCsrEnrollmentCa:
-          ansible_host: 20.231.40.159
+          ansible_host: 10.10.12.14
           ansible_user: keyfactor
     ssTlsCerts:
       hosts:

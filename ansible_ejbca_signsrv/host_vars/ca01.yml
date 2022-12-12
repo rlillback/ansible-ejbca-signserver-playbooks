@@ -1,18 +1,18 @@
 ---
 
-hostname: ejbca01.solitude.skyrim
+hostname: to-ca.keyfactoriot.com
 
 # Dirty hack to tell the type of instance till something better is used
 #ejbca_type: CA
 
 # Info to create HTTPD end entity in EJBCA for the TLS certificate
 tls_identity_info:
-  - dn: "C={{ countryName }},O={{ organizationName }},OU=Devices,CN=ca01.{{ organizationDomainName }}"
-    name: "ca01.{{ organizationDomainName }}"
-    full_dn: "C={{ countryName }},O={{ organizationName }},OU=Devices,CN=ca01.{{ organizationDomainName }}"
+  - dn: "C={{ countryName }},O={{ organizationName }},OU=Devices,CN=to-ca.{{ organizationDomainName }}"
+    name: "to-ca.{{ organizationDomainName }}"
+    full_dn: "C={{ countryName }},O={{ organizationName }},OU=Devices,CN=to-ca.{{ organizationDomainName }}"
     username: ca_httpd_tls
     password: "{{ encrypted_httpd_identity_password | default('foo123') }}"
-    altname: "dNSName=ca01.{{ organizationDomainName }}, dNSName=ca.{{ organizationDomainName }}, dNSName=sapi.ca.{{ organizationDomainName }}, dNSName=api.ca.{{ organizationDomainName }}"
+    altname: "dNSName=to-ca.{{ organizationDomainName }}, dNSName=ca.{{ organizationDomainName }}, dNSName=sapi.ca.{{ organizationDomainName }}, dNSName=api.ca.{{ organizationDomainName }}"
     certprofile: tlsServerClientAuth
     eeprofile: "tlsServer{{ organizationName }}"
     caname: "{{ organizationName }}-Sub-CA"
@@ -26,7 +26,7 @@ httpd_identity_info:
 
 # Super Admin accounts to create
 management_add_end_entities:
-  - username: "SkyrimSuperAdministrator"
+  - username: "SuperAdministrator"
     dn: "C={{ countryName }},O={{ organizationName }},OU=Administrators,CN={{ superAdminCn }}"
     caname: "ManagementCA"
     token: "P12"
@@ -523,8 +523,8 @@ configdump_files:
   - src: 'service-ocspService.yaml.j2'
     dest: '{{ ejbca_home }}/dump/va/services/ocspService.yaml'
     # Files for External RA
-  - src: 'role-ra-peer-connection.yaml.j2'
-    dest: '{{ ejbca_home }}/dump/ra/admin-roles/role-ra-peer-connection.yaml'
+#  - src: 'role-ra-peer-connection.yaml.j2'
+#    dest: '{{ ejbca_home }}/dump/ra/admin-roles/role-ra-peer-connection.yaml'
 
 configdump_approval_dir_structure:  
   - "{{ ejbca_home }}/dump/dumpApp/approval-profiles"

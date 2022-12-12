@@ -41,7 +41,7 @@
     become: yes
     register: ra_addIdent_result
     tags: certreq-cli-batch
-    no_log: true
+    no_log: false
     failed_when: ra_addIdent_result.rc >= 2
     changed_when: ra_addIdent_result.rc == 0
 
@@ -56,7 +56,7 @@
     become: yes
     register: ra_setpwd_result
     tags: certreq-cli-batch
-    no_log: true
+    no_log: false
     failed_when: ra_setpwd_result.rc >= 2
     changed_when: ra_setpwd_result.rc == 0
 
@@ -77,7 +77,7 @@
     become: yes
     register: ra_batch_result
     tags: certreq-cli-batch
-    no_log: true
+    no_log: false
     failed_when: ra_batch_result.rc >= 2
     changed_when: ra_batch_result.rc == 0
 
@@ -223,14 +223,14 @@
     - ra_batch_result.changed|bool or
       ra_force_batch_again is defined and ra_force_batch_again|bool
 
-- name: Cleanup the cert files in /var/tmp
-  file:
-    path: "{{ identity_batch_output_dir }}/pem/"
-    state: absent
-  tags: certreq-cli-batch
-  when:
-    - item.token == 'PEM'
-    - item.useType is defined
-    - (item.useType == "ra") or (item.useType == "va") or (item.useType == "root") or (item.useType == "signserver")
-    - ra_batch_result is defined
-    - ra_batch_result.changed|bool
+# - name: Cleanup the cert files in /var/tmp
+#  file:
+#    path: "{{ identity_batch_output_dir }}/pem/"
+#    state: absent
+#  tags: certreq-cli-batch
+#  when:
+#    - item.token == 'PEM'
+#    - item.useType is defined
+#    - (item.useType == "ra") or (item.useType == "va") or (item.useType == "root") or (item.useType == "signserver")
+#    - ra_batch_result is defined
+#    - ra_batch_result.changed|bool

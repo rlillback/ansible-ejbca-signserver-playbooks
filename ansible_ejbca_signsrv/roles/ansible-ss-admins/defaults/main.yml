@@ -1,8 +1,8 @@
 ---
 # defaults file for ansible-ss-admins
 
-organizationName: Solitude
-organizationDomainName: solitude.skyrim
+organizationName: Keyfactor
+organizationDomainName: keyfactoriot.com
 countryName: US
 
 signsrv_root_dir: /opt
@@ -17,4 +17,4 @@ signsrv_user: wildfly
 signsrv_admins:
   - name: "Super Admin"
     serial: 7491076C9E4BA13EE882551C8066A8B26C4C4BC6
-    issuerdn: "CN=ManagementCA,OU=Certification Authorities,OU=Solitude,O=Skyrim"
+    issuerdn: "CN=ManagementCA,OU=Certification Authorities,O=Keyfactor"
