@@ -4,12 +4,12 @@
 #ansible_python_interpreter: /usr/bin/python3
 
 # Configure the Orgnaization variables used for templating DN's and FQDN's
-organizationName: Keyfactor
+organizationName: ejbca-testing
 organizationNameShort: "{{ organizationName }}"
 organizationNameCRL: "{{ organizationName }}"
-organizationDomainName: keyfactoriot.com
+organizationDomainName: local
 countryName: US
-superAdminCn: "Keyfactor-SA"
+superAdminCn: "EJBCA-Testing-SA"
 sharedVarsLocation: ~/ansible/ansibleCacheDir
 
 # Deployment locations for all the servers

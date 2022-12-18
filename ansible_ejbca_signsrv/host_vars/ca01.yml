@@ -1,18 +1,18 @@
 ---
 
-hostname: to-ca.keyfactoriot.com
+hostname: rocky-ca.local
 
 # Dirty hack to tell the type of instance till something better is used
 #ejbca_type: CA
 
 # Info to create HTTPD end entity in EJBCA for the TLS certificate
 tls_identity_info:
-  - dn: "C={{ countryName }},O={{ organizationName }},OU=Devices,CN=to-ca.{{ organizationDomainName }}"
-    name: "to-ca.{{ organizationDomainName }}"
-    full_dn: "C={{ countryName }},O={{ organizationName }},OU=Devices,CN=to-ca.{{ organizationDomainName }}"
+  - dn: "C={{ countryName }},O={{ organizationName }},OU=Devices,CN=rocky.ca.{{ organizationDomainName }}"
+    name: "rocky-ca.{{ organizationDomainName }}"
+    full_dn: "C={{ countryName }},O={{ organizationName }},OU=Devices,CN=rocky-ca.{{ organizationDomainName }}"
     username: ca_httpd_tls
     password: "{{ encrypted_httpd_identity_password | default('foo123') }}"
-    altname: "dNSName=to-ca.{{ organizationDomainName }}, dNSName=ca.{{ organizationDomainName }}, dNSName=sapi.ca.{{ organizationDomainName }}, dNSName=api.ca.{{ organizationDomainName }}"
+    altname: "dNSName=rocky-ca.{{ organizationDomainName }}, dNSName=ca.{{ organizationDomainName }}, dNSName=sapi.ca.{{ organizationDomainName }}, dNSName=api.ca.{{ organizationDomainName }}"
     certprofile: tlsServerClientAuth
     eeprofile: "tlsServer{{ organizationName }}"
     caname: "{{ organizationName }}-Sub-CA"
