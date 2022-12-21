@@ -2,96 +2,87 @@
 
 all:
   hosts:
-    ejbcart01.solitude.skyrim
-    ejbca01.solitude.skyrim
-    ejbcava01.solitude.skyrim
-    ejbcara01.solitude.skyrim
-    webrepo.solitude.skyrim
+    ejbca-rocky8.keyfactoriot.com
   children:
     eeRootCaServers:
       hosts:
         rt01:
-          ansible_host: 172.16.170.13
+          ansible_host:
     eeCaServers:
       hosts:
         ca01:
-          ansible_host: 172.16.170.170
+          ansible_host: 10.10.12.15
+          ansible_user: keyfactor
     ejbcaCaAddNodes:
       hosts:
         ca02:
-          ansible_host: 172.16.170.202
+          ansible_host:
     extSignMgmtCaServers:
       hosts:
         extsignmgmt01:
-          ansible_host: 172.16.170.178
+          ansible_host:
     extSignPolicyCas:
       hosts:
         extsignpolca01:
-          ansible_host: 172.16.170.178
+          ansible_host: 
     policyCaSignIssuingCas:
       hosts:
         polcasignissueca:
-          ansible_host: 172.16.170.178
+          ansible_host: 
     peerconfigCas:
       hosts:
         peerca01:
-          ansible_host: 172.16.170.178 
+          ansible_host: 
     extEeRootCaServers:
       hosts:
         extroot01:
-          ansible_host: 172.16.170.180
+          ansible_host: 
     eeSubCaServers:
       hosts:
         subca01:
-          ansible_host: 172.16.170.179
+          ansible_host: 
     eeRaServers:
       hosts:
         ra01:
-          ansible_host: 172.16.170.172
+          ansible_host: 
     eeVaServers:
       hosts:
         va01:
-          ansible_host: 172.16.170.173
+          ansible_host: 
     eeSignServers:
       hosts:
         ss01:
-          ansible_host: 172.16.170.178
+          ansible_host: 
     ceSignServers:
       hosts:
         cess01:
-          ansible_host: 172.16.170.179
+          ansible_host: 
     dbServers:
       hosts:
-        webrepo.solitude.skyrim:
-          ansible_host: 172.16.170.133       
-    vaSigners:
-      hosts:
-        va01:
-          ansible_host: 172.16.170.173
     ceServers:
       hosts:
         ce01:
-          ansible_host: 172.16.170.177
+          ansible_host: 
     conServers:
       hosts:
         docker02.solitude.skyrim:
-          ansible_host: 172.16.170.8
+          ansible_host: 
     pkiTlsCerts:
       hosts:
         pkiTlsEnrollmentCA:
-          ansible_host: 172.16.170.170
+          ansible_host: 
     pkiCsrCerts:
       hosts:
         pkiCsrEnrollmentCa:
-          ansible_host: 172.16.170.170
+          ansible_host: 
     ssTlsCerts:
       hosts:
         ssTlsEnrollmentCa:
-          ansible_host: 172.16.170.170 
+          ansible_host: 
     ssCsrCerts:
       hosts:
         ssCsrEnrollmentCa:
-          ansible_host: 172.16.170.170   
+          ansible_host: 
     httpdServers:
       children:
         eeCaServers:

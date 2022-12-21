@@ -11,6 +11,6 @@
     - ansible-ejbca-wildfly
     - ansible-ejbca-pkc11-client
     - ansible-ejbca-prep
-    - ansible-ejbca-deploy-pki-sample
+    - ansible-ejbca-deploy-pki-ca-node-mgmt-ca
     - ansible-ejbca-crl-import-export
     - ansible-pki-ss-httpd

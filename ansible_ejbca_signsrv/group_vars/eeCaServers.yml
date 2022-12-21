@@ -1,11 +1,14 @@
 ---
 
+# enable ssh login via file
+ansible_ssh_private_key_file: ~/.ssh/ed25519
+
 # If enabled this will configure a publisher for OCSP, OCSP signer key update service, OSCP publishing queue, OCSP publisher to the certificate profiles,
 # create Peer connection, and create an auth key binding
-use_external_va: true
+use_external_va: false
 
 # If enabled this will configure a Peer connection, and add the RA Peer role to EJBCA 
-use_external_ra: true
+use_external_ra: false
 
 # If enabled configures a Peer connectiona nd key binding for Sign Server
 use_external_ss: false
@@ -28,7 +31,8 @@ ejbca_version: 7.10.0.1
 use_local_repository: false
 ejbca_remote_dir: ~/Downloads/PK-Software/ejbca_ee_7_10_0_1.zip
 # EJBCA URL to download the zip release file
-ejbca_software_url: http://172.16.170.133:8080/ejbca/ejbca_ee_7_10_0_1.zip
+# ejbca_software_url: http://172.16.170.133:8080/ejbca/ejbca_ee_7_10_0_1.zip
+ejbca_software_url: http://10.10.10.241/ray/ejbca/-/raw/main/ejbca_ee_7_10_0_1.zip
 ejbca_src_dir_name: ejbca_ee_7_10_0_1
 ejbca_type: CA
 
@@ -50,7 +54,7 @@ appsrv_datasources:
     #database_jar_filename is mariadb-java-client.jar or mssql-java-client.jar
     database_jar_filename: mariadb-java-client.jar
     host: 127.0.0.1
-    backup_host: ejbca01.solitude.skyrim
+    backup_host: ejbca-rocky8.keyfactoriot.com
     port: 3306
     database: ejbca
     user: ejbca-usr
@@ -117,7 +121,7 @@ ejbca_templated_properties_files:
 # servlet. Use ';' for between multiple IPs.
 # IPv6 address can be specified, for example 127.0.0.1;0:0:0:0:0:0:0:1.
 # "ANY" can be specified to allow any remote IP.
-ejbca_conf_healtcheck_authorizedips: 127.0.0.1
+ejbca_conf_healtcheck_authorizedips: 127.0.0.1;10.10.60.2;10.10.60.1
 
 # Set this to true to use P11NG with EJBCA 
 web_use_p11ng: true

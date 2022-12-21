@@ -4,12 +4,12 @@
 #ansible_python_interpreter: /usr/bin/python3
 
 # Configure the Orgnaization variables used for templating DN's and FQDN's
-organizationName: Solitude
+organizationName: KeyfactorIoT
 organizationNameShort: "{{ organizationName }}"
 organizationNameCRL: "{{ organizationName }}"
-organizationDomainName: solitude.skyrim
+organizationDomainName: keyfactoriot.com
 countryName: US
-superAdminCn: "Skyrim-Keyfactor-SA"
+superAdminCn: "KeyfactorIoT-SA"
 sharedVarsLocation: ~/ansible/ansibleCacheDir
 
 # Deployment locations for all the servers
@@ -82,10 +82,6 @@ httpd_trusted_cas:
 ejbca_ca_import:
   - caname: "ManagementCA"
     superadmincn: "{{ superAdminCn }}"
-    fullchain: false
-  - caname: "{{ organizationNameShort }}-Sub-CA"
-    fullchain: false
-  - caname: "{{ organizationNameShort }}-Root-CA"
     fullchain: false
 
 # Number of bits in serial numbers issued by EJBCA
