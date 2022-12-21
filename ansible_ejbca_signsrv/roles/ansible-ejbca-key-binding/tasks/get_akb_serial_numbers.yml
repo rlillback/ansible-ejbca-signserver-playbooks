@@ -1,6 +1,14 @@
 ---
 # tasks file for roles/ansible-ejbca-key-binding
 
+- name: Debug by dumping used variables
+  debug:
+    msg:
+      - "ejbca_sh = {{ ejbca_sh }}"
+      - "ejbca_user = {{ ejbca_user }}"
+      - "sharedVarsLocation = {{ sharedVarsLocation }}"
+      - "peer_cert_serial_numbers type = {{ peer_cert_serial_numbers|type_debug }}"
+
 - name: Query Key Binding
   command: "{{ ejbca_sh }} keybind list"
   become: yes
@@ -31,6 +39,14 @@
 #  debug:
 #    var: kb_hex_serial_numbers
 
+- name: Debug the created values
+  debug:
+    msg:
+      - "keybinding_list type_debug = {{ keybinding_list|type_debug }}"
+      - "keybinding_list = {{ keybinding_list }}"
+      - "ejbca_keybinding type_debug = {{ ejbca_keybinding|type_debug }}"
+      - "ejbca_keybinding = {{ ejbca_keybinding }}"
+
 - name: Create fact with 40 bit Key Binding certificate serial numbers and the type of use (RA/SS/VA)
   set_fact:
     peer_cert_serial_numbers: |
@@ -43,6 +59,7 @@
       {% endfor %}
       {% endfor %}
       ]
+  when: (ejbca_keybinding is defined) and (ejbca_keybinding|type_debug != 'NoneType')
 
 - name: Write cert serial numbers to shared vars directory {{ sharedVarsLocation }}/peer_cert_serial_numbers.yml for use with EJBCA VA or RA playbooks 
   become: no
@@ -51,3 +68,4 @@
     content: "{{ peer_cert_serial_numbers| to_nice_yaml }}"
   delegate_to: localhost
   register: write_the_output2
+  when: (peer_cert_serial_numbers is defined) and (peer_cert_serial_numbers|type_debug != 'NoneType')

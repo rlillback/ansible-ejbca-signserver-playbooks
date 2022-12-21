@@ -1,6 +1,12 @@
 ---
 # tasks file for roles/ansible-ejbca-deploy-pki-ca-node-mgmt-ca
 
+- name: Debug Configdump to make ManagementCA
+  debug:
+    msg:
+      - "deploy_with_configdump = {{ deploy_with_configdump }}"
+      - "management_add_certification_authorities = {{ management_add_certification_authorities }}"
+
 - name: Prepare configdump template files
   include_role: 
     name: ansible-ejbca-cnfdump-stage
@@ -181,13 +187,19 @@
   when: 
     - management_add_administrators[0] is defined
 
+- name: Debug the variables used in copying superadmin.p12 to the local server
+  debug:
+    msg:
+      - "ejbca_home = {{ ejbca_home }}"
+      - "management_add_end_entities = {{ management_add_end_entities }}"
+
 - name: Copy superadmin.p12 to local server
   fetch:
     src: "{{ ejbca_home }}/p12/{{ item.username }}.p12"
     dest: "{{ superadmin_local_dir|default('~/Desktop') }}/"
     flat: yes
   loop: "{{ management_add_end_entities }}"
-  no_log: true
+#  no_log: true
   register: copy_down_profile
 
 - name: Add Root Node TLS end entity

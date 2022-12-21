@@ -14,11 +14,17 @@
 #- debug:
 #    var: endentity_exists
 
-- debug:
-    msg: "Failed to query username: {{ endentity_exists.stdout }}"
-  when: 
-    - "'FAILED' in endentity_exists.stderr"
-  failed_when: true
+# - debug: Debug if FAILED exists in endentity_exists.stderr
+#    msg: "Failed to query username: {{ endentity_exists.stdout }}"
+#  when: 
+#    - "'FAILED' in endentity_exists.stderr"
+#  failed_when: true
+
+- name: Debug batch cert request variables
+  debug:
+    msg:
+      - "item = {{ item }}"
+      - "endentity_exists = {{ endentity_exists }}"
 
 - name: Create the entity in EJBCA and generate a certificate
   block:
@@ -41,9 +47,15 @@
     become: yes
     register: ra_addIdent_result
     tags: certreq-cli-batch
-    no_log: true
+#     no_log: true
     failed_when: ra_addIdent_result.rc >= 2
     changed_when: ra_addIdent_result.rc == 0
+
+  - name: Debug dump variables after Add {{ item.username }} Entity to CA
+    debug:
+      msg:
+        - "ra_addIdent_result = {{ ra_addIdent_result }}"
+    when: ra_addIdent_result is defined
 
   - name: Set password for {{ item.username }}
     command: >
@@ -56,9 +68,15 @@
     become: yes
     register: ra_setpwd_result
     tags: certreq-cli-batch
-    no_log: true
+#     no_log: true
     failed_when: ra_setpwd_result.rc >= 2
     changed_when: ra_setpwd_result.rc == 0
+
+  - name: Debug dump variables after Set password for {{ item.username }}
+    debug:
+      msg:
+        - "ra_setpwd_result = {{ ra_setpwd_result }}"
+    when: ra_setpwd_result is defined
 
   - name: Create certs for {{ item.username }}
     command: >
@@ -77,9 +95,15 @@
     become: yes
     register: ra_batch_result
     tags: certreq-cli-batch
-    no_log: true
+#     no_log: true
     failed_when: ra_batch_result.rc >= 2
     changed_when: ra_batch_result.rc == 0
+
+  - name: Debug dump variables after Create certs for {{ item.username }}
+    debug:
+      msg:
+        - "ra_batch_result = {{ ra_batch_result }}"
+    when: ra_batch_result is defined
 
   #- debug:
       #msg: "Failed to create certs for username: {{ item.username }}"
@@ -223,6 +247,7 @@
     - ra_batch_result.changed|bool or
       ra_force_batch_again is defined and ra_force_batch_again|bool
 
+# RAL Don't run the following
 - name: Cleanup the cert files in /var/tmp
   file:
     path: "{{ identity_batch_output_dir }}/pem/"
@@ -234,3 +259,4 @@
     - (item.useType == "ra") or (item.useType == "va") or (item.useType == "root") or (item.useType == "signserver")
     - ra_batch_result is defined
     - ra_batch_result.changed|bool
+    - dont_run_me is defined

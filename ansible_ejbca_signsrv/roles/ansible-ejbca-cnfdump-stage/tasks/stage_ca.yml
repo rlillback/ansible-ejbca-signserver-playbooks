@@ -1,5 +1,24 @@
 ---
 
+- name: Debug CA stage by dumping variables
+  debug:
+    msg:
+      - "ejbca_user = {{ ejbca_user }}"
+      - "ejbca_group = {{ ejbca_group }}"
+      - "item.caname = {{ item.caname }}"
+      - "item.publishers = {{ item.publishers }}"
+      - "ejbca_home = {{ ejbca_home }}"
+      - "dump_dest = {{ dump_dest }}"
+      - "item.publishers type_debug = {{ item.publishers|type_debug }}"
+      - "item = {{ item }}"
+
+- name: Debug CA stage 2
+  debug:
+    msg:
+      - "add_publshers_to_cas = {{ add_publshers_to_cas }}"
+  when:
+    - add_publshers_to_cas is defined
+
 - name: Stage CA to create with configdump
   template:
     src: ca-template.yml.j2
@@ -7,7 +26,7 @@
     owner: "{{ ejbca_user }}"
     group: "{{ ejbca_group }}"
     mode: 0664
-  no_log: true
+#     no_log: true
 
 - name: Stage CA configdump to update with Publishers
   copy:
@@ -18,5 +37,5 @@
     mode: 0664  
     remote_src: yes
   when:
-    - add_publshers_to_cas is defined
+    - add_publshers_to_cas is defined and (item.publishers|type_debug != 'NoneType')
     - add_publshers_to_cas|bool
