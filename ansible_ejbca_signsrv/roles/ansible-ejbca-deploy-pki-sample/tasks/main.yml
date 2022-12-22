@@ -1,6 +1,11 @@
 ---
 # tasks file for roles/ansible-ejbca-deploy-pki-sample
 
+- name: Debug let us know we entered the ansible-ejbca-deploy-pki-sample
+  debug:
+    msg:
+      - "We entered ansible-ejbca-deploy-pki-sample"
+
 - name: Prepare configdump template files
   include_role: 
     name: ansible-ejbca-cnfdump-stage
