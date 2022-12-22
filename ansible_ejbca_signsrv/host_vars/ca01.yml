@@ -1,6 +1,6 @@
 ---
 
-hostname: rocky-ca.local
+hostname: ejbca-rocky8.keyfactoriot.com
 
 # Dirty hack to tell the type of instance till something better is used
 #ejbca_type: CA

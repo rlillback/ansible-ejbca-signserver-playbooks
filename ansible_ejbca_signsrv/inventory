@@ -2,7 +2,7 @@
 
 all:
   hosts:
-    to-ca.keyfactoriot.com
+    ejbca-rocky8.keyfactoriot.com
   children:
     eeRootCaServers:
       hosts:
@@ -11,82 +11,8 @@ all:
     eeCaServers:
       hosts:
         ca01:
-          ansible_host: 192.168.234.102
+          ansible_host: 10.10.12.15
           ansible_user: keyfactor
-    ejbcaCaAddNodes:
-      hosts:
-        ca02:
-          ansible_host: 
-    extSignMgmtCaServers:
-      hosts:
-        extsignmgmt01:
-          ansible_host: 
-    extSignPolicyCas:
-      hosts:
-        extsignpolca01:
-          ansible_host: 
-    policyCaSignIssuingCas:
-      hosts:
-        polcasignissueca:
-          ansible_host: 
-    peerconfigCas:
-      hosts:
-        peerca01:
-    extEeRootCaServers:
-      hosts:
-        extroot01:
-    eeSubCaServers:
-      hosts:
-        subca01:
-          ansible_host: 192.168.234.102
-          ansible_user: keyfactor
-    eeRaServers:
-      hosts:
-        ra01:
-          ansible_host: 192.168.234.102
-          ansible_user: keyfactor
-    eeVaServers:
-      hosts:
-        va01:
-          ansible_host: 192.168.234.102
-          ansible_user: keyfactor
-    eeSignServers:
-      hosts:
-        ss01:
-    ceSignServers:
-      hosts:
-        cess01:
-    dbServers:
-      hosts:
-        to-ca.keyfactoriot.com:
-          ansible_host: 192.168.234.102
-    vaSigners:
-      hosts:
-        va01:
-          ansible_host: 192.168.234.102
-          ansible_user: keyfactor
-    ceServers:
-      hosts:
-        ce01:
-    conServers:
-      hosts:
-        docker02.solitude.skyrim:
-    pkiTlsCerts:
-      hosts:
-        pkiTlsEnrollmentCA:
-          ansible_host: 192.168.234.102
-          ansible_user: keyfactor
-    pkiCsrCerts:
-      hosts:
-        pkiCsrEnrollmentCa:
-          ansible_host: 192.168.234.102
-          ansible_user: keyfactor
-    ssTlsCerts:
-      hosts:
-        ssTlsEnrollmentCa:
-    ssCsrCerts:
-      hosts:
-        ssCsrEnrollmentCa:
     httpdServers:
       children:
         eeCaServers:

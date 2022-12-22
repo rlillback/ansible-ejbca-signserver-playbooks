@@ -31,8 +31,8 @@ ejbca_version: 7.10.0.1
 use_local_repository: false
 ejbca_remote_dir: ~/Downloads/PK-Software/ejbca_ee_7_10_0_1.zip
 # EJBCA URL to download the zip release file
-# ejbca_software_url: http://10.10.10.241/ray/ejbca/-/raw/main/ejbca_ee_7_10_0_1.zip
-ejbca_software_url: http://gitlab.keyfactoriot.com/ray/ejbca/-/raw/main/ejbca_ee_7_10_0_1.zip
+ejbca_software_url: http://10.10.10.241/ray/ejbca/-/raw/main/ejbca_ee_7_10_0_1.zip
+# ejbca_software_url: http://gitlab.keyfactoriot.com/ray/ejbca/-/raw/main/ejbca_ee_7_10_0_1.zip
 ejbca_src_dir_name: ejbca_ee_7_10_0_1
 ejbca_type: CA
 
