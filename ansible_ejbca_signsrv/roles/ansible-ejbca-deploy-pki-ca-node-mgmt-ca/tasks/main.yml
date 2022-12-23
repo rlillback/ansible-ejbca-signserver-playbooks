@@ -5,6 +5,7 @@
   debug:
     msg:
       - "deploy_with_configdump = {{ deploy_with_configdump }}"
+      - "management_add_certification_authorities[0] = {{ management_add_certification_authorities[0] }}"
       - "management_add_certification_authorities = {{ management_add_certification_authorities }}"
 
 - name: Prepare configdump template files
@@ -134,6 +135,19 @@
   become: yes 
   become_user: "{{ ejbca_user }}"
 
+# RAL Added this to pull in dump3, which includes the Management CA User
+- name: Import dump3 of profiles and services
+  command: >
+    ./configdump.sh import
+    --ignore-errors
+    --overwrite update
+    --non-interactive continue
+    -l {{ ejbca_home }}/dump/dump3
+  args:
+    chdir: "{{ ejbca_home }}/dist/configdump"
+  become: yes
+  become_user: "{{ ejbca_user }}"
+
 - name: Configure EJBCA Enrollment protocols
   include_role:
     name: ansible-ejbca-enroll-protocols
@@ -167,6 +181,11 @@
   delegate_to: localhost
   when: not ejbca_csr_dir_output_exists.stat.exists
 
+- name: Debug Add PKI Admin end entities runs if management_add_end_entities[0] exists
+  debug:
+    msg:
+      - "management_add_end_entities[0] = {{ management_add_end_entities[0] }}"
+
 - name: Add PKI Admin end entities
   include_role:
     name: ansible-ejbca-certreq-cli
@@ -176,6 +195,11 @@
     label: "{{ item.username }}"
   when: 
     - management_add_end_entities[0] is defined
+
+- name: Debug add PKI admins to roles runs if management_add_administrators[0] exists
+  debug:
+    msg:
+      - "management_add_administrators[0] = {{ management_add_administrators[0] }}"
 
 - name: Add PKI administrators to roles
   include_role:

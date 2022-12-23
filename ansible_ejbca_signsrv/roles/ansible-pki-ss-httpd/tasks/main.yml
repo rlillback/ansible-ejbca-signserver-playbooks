@@ -1,6 +1,12 @@
 ---
 # tasks file for ansible-ejbca-httpd
 
+- name: Debug ansible-ejbca-httpd dump variables
+  debug:
+    msg:
+      - "inventory_hostname = {{ inventory_hostname }}"
+      - "groups = {{ groups }}"
+
 - name: Install HTTPD
   include_tasks: install.yml
 

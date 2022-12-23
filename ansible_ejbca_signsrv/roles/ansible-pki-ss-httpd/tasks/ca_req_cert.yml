@@ -1,5 +1,10 @@
 ---
 
+- name: Debug ansible-pki-ss-httpd ca_req_cert.yml by dumping variables
+  debug:
+    msg:
+      - "httpd_identity_info = {{ httpd_identity_info }}"
+
 - name: Check if TLS Certificate file already exists
   stat:
     path: "{{ ejbca_home }}/p12/pem/{{ httpd_identity_info.id_name }}.pem"

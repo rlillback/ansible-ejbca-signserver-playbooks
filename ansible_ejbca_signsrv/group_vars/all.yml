@@ -71,8 +71,6 @@ ejbca_jdbc_gen_name: "{{ appsrv_datasources[0].database_jar_filename }}"
 httpd_trusted_cas:
   - caname: "ManagementCA"
     fullchain: true
-  - caname: "{{ organizationNameShort }}-Sub-CA"
-    fullchain: true
 
 # List of CA's to export the CA cert from EJBCA CA nodes and import as an external CA into external RA/VA nodes.
 # This variable is also used for exporting CRL's from EJBCA CA node to import into external RA/VA's

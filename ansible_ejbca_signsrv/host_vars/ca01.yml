@@ -8,21 +8,23 @@ hostname: ejbca-rocky8.keyfactoriot.com
 # Info to create HTTPD end entity in EJBCA for the TLS certificate
 tls_identity_info:
   - dn: "C={{ countryName }},O={{ organizationName }},OU=Devices,CN=ejbca-rocky8.{{ organizationDomainName }}"
-    name: "ca01.{{ organizationDomainName }}"
+    name: "ejbca-rocky8.{{ organizationDomainName }}"
     full_dn: "C={{ countryName }},O={{ organizationName }},OU=Devices,CN=ejbca-rocky8.{{ organizationDomainName }}"
     username: ca_httpd_tls
     password: "{{ encrypted_httpd_identity_password | default('foo123') }}"
     altname: "dNSName=ejbca-rocky8.{{ organizationDomainName }}, dNSName=ca.{{ organizationDomainName }}, dNSName=sapi.ca.{{ organizationDomainName }}, dNSName=api.ca.{{ organizationDomainName }}"
     certprofile: tlsServerClientAuth
     eeprofile: "tlsServer{{ organizationName }}"
-    caname: "{{ organizationName }}-Sub-CA"
+    # caname: "{{ organizationName }}-Sub-CA"
+    caname: "ManagementCA"
     token: PEM
     useType: ca
 
 # Dirty mapping of httpd cert file name till something better is used 
 httpd_identity_info:
   id_name: "{{ identity_info[0].name }}"
-  id_ca_cert_file: "{{ identity_info[0].caname }}.crt"
+  # id_ca_cert_file: "{{ identity_info[0].caname }}.crt"
+  id_ca_cert_file: "{{ identity_info[0].name }}.crt"
 
 # Super Admin accounts to create
 management_add_end_entities:
@@ -149,8 +151,6 @@ configdump_files:
     dest: '{{ ejbca_home }}/dump/dump1/extended-key-usage/extended-key-usages.yaml'
   - src: 'ee-AdminInternal.yaml.j2'
     dest: '{{ ejbca_home }}/dump/dump3/end-entity-profiles/AdminInternal.yaml'
-  - src: 'ee-tlsServerOrg.yaml.j2'
-    dest: '{{ ejbca_home }}/dump/dump3/end-entity-profiles/tlsServer{{ organizationNameShort }}.yaml'
   - src: 'ee-tlsServerMgmt.yaml.j2'
     dest: '{{ ejbca_home }}/dump/dump3/end-entity-profiles/tlsServerMgmt.yaml'
   - src: 'cp-tlsServerMgmtCA.yaml.j2'
@@ -163,6 +163,10 @@ configdump_files:
     dest: '{{ ejbca_home }}/dump/dump3/certificate-profiles/tlsServerClientAuth.yaml'
   - src: 'cp-adminMgmtCA.yaml.j2'
     dest: '{{ ejbca_home }}/dump/dump3/certificate-profiles/adminMgmtCA.yaml'
+  - src: 'cp-AdminNoCDPMgmtCA.yaml.j2'
+    dest: '{{ ejbca_home }}/dump/dump3/certificate-profiles/AdminNoCDPMgmtCA.yaml'
+  - src: 'ee-tlsServerOrg.yaml.j2'
+    dest: '{{ ejbca_home }}/dump/dump3/end-entity-profiles/tlsServer{{ organizationNameShort }}.yaml'
 
 configdump_approval_dir_structure:  
 
