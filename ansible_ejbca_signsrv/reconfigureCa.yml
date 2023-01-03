@@ -1,0 +1,9 @@
+---
+
+# ansible-playbook -i inventory -l ca01 reconfigureCA.yml
+
+- hosts: pkiServers
+  become: yes
+  become_method: sudo
+  roles:
+    - ansible-ejbca-trusted-firmware

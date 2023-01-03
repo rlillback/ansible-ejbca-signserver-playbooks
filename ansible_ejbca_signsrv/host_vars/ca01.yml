@@ -1,18 +1,22 @@
 ---
 
-hostname: ejbca-rocky8.keyfactoriot.com
+hostname: ejbca-rocky8-2.keyfactoriot.com
+cname: ejbca-rocky8-2
+
+# RAL Added this to include more debugging info
+print_debug_info: true
 
 # Dirty hack to tell the type of instance till something better is used
 #ejbca_type: CA
 
 # Info to create HTTPD end entity in EJBCA for the TLS certificate
 tls_identity_info:
-  - dn: "C={{ countryName }},O={{ organizationName }},OU=Devices,CN=ejbca-rocky8.{{ organizationDomainName }}"
-    name: "ejbca-rocky8.{{ organizationDomainName }}"
-    full_dn: "C={{ countryName }},O={{ organizationName }},OU=Devices,CN=ejbca-rocky8.{{ organizationDomainName }}"
+  - dn: "C={{ countryName }},O={{ organizationName }},OU=Devices,CN={{ cname }}.{{ organizationDomainName }}"
+    name: "{{ cname }}.{{ organizationDomainName }}"
+    full_dn: "C={{ countryName }},O={{ organizationName }},OU=Devices,CN={{ cname }}.{{ organizationDomainName }}"
     username: ca_httpd_tls
     password: "{{ encrypted_httpd_identity_password | default('foo123') }}"
-    altname: "dNSName=ejbca-rocky8.{{ organizationDomainName }}, dNSName=ca.{{ organizationDomainName }}, dNSName=sapi.ca.{{ organizationDomainName }}, dNSName=api.ca.{{ organizationDomainName }}"
+    altname: "dNSName={{ cname }}.{{ organizationDomainName }}, dNSName=sapi.ca.{{ organizationDomainName }}, dNSName=api.ca.{{ organizationDomainName }}"
     certprofile: tlsServerClientAuth
     eeprofile: "tlsServer{{ organizationName }}"
     # caname: "{{ organizationName }}-Sub-CA"

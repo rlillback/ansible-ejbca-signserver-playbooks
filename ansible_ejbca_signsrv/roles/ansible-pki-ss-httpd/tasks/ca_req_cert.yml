@@ -4,11 +4,18 @@
   debug:
     msg:
       - "httpd_identity_info = {{ httpd_identity_info }}"
+  when: (print_debug_info is defined) and (print_debug_info|bool)
 
 - name: Check if TLS Certificate file already exists
   stat:
     path: "{{ ejbca_home }}/p12/pem/{{ httpd_identity_info.id_name }}.pem"
   register: tls_cert_exists
+
+- name: Debug tls_cert_exists by dumping its variable
+  debug:
+    msg:
+      - "tls_cert_exists = {{ tls_cert_exists }}"
+  when: (print_debug_info is defined) and (print_debug_info|bool)
 
 - name: Create httpd tls certificate
   include_role:

@@ -3,6 +3,9 @@
 # Set the default Python interpreter
 #ansible_python_interpreter: /usr/bin/python3
 
+# Configure the global debug enable parameter
+print_debug_info: true
+
 # Configure the Orgnaization variables used for templating DN's and FQDN's
 organizationName: KeyfactorIoT
 organizationNameShort: "{{ organizationName }}"

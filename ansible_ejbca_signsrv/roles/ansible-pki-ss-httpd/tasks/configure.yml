@@ -1,5 +1,36 @@
 ---
 
+- name: Debug Dump Variables before Stage HTTPD certificate files
+  debug:
+    msg:
+      - "inventory_hostname = {{ inventory_hostname }}"
+      - "groups = {{ groups }}"
+  when: (print_debug_info is defined) and (print_debug_info|bool)
+
+# RAL BEGIN Added section to create trusted-ca.crt file if it doesn't exist and 
+#           we won't run the State HTTPD certificate files section
+- name: Prep trusted-ca.crt if we are not going to run Stage HTTPD certificate files
+  block:
+
+    - name: Check if trusted-ca.crt already exists
+      stat:
+        path: /etc/pki/tls/certs/trusted-ca.crt
+      register: trusted_ca_crt_exists
+
+    - name: Add {{ httpd_identity_info.id_name }}-CA.pem to trusted-ca.crt file
+      shell: >
+        cat {{ ejbca_home }}/p12/pem/{{ httpd_identity_info.id_name }}-CA.pem 
+        >> /etc/pki/tls/certs/trusted-ca.crt
+
+  when:
+    - inventory_hostname not in groups['eeRaServers'] and
+      inventory_hostname not in groups['eeVaServers'] and
+      inventory_hostname not in groups['eeSignServers'] and
+      inventory_hostname not in groups['ceSignServers'] and
+      ((trusted_ca_crt_exists is defined) and not (trusted_ca_crt_exists|bool))
+
+# RAL END Added section
+
 - name: Stage HTTPD certificate files
   block:
 

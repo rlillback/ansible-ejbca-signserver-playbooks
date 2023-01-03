@@ -2,45 +2,13 @@
 
 all:
   hosts:
-    ejbca-rocky8.keyfactoriot.com
+    ejbca-rocky8-2.keyfactoriot.com
   children:
-    eeRootCaServers:
-      hosts:
-        rt01:
-          ansible_host:
     eeCaServers:
       hosts:
         ca01:
-          ansible_host: 10.10.12.15
+          ansible_host: 10.10.12.16
           ansible_user: keyfactor
-    ejbcaCaAddNodes:
-      hosts:
-        ca02:
-          ansible_host:
-    extSignMgmtCaServers:
-      hosts:
-        extsignmgmt01:
-          ansible_host:
-    extSignPolicyCas:
-      hosts:
-        extsignpolca01:
-          ansible_host: 
-    policyCaSignIssuingCas:
-      hosts:
-        polcasignissueca:
-          ansible_host: 
-    peerconfigCas:
-      hosts:
-        peerca01:
-          ansible_host: 
-    extEeRootCaServers:
-      hosts:
-        extroot01:
-          ansible_host: 
-    eeSubCaServers:
-      hosts:
-        subca01:
-          ansible_host: 
     eeRaServers:
       hosts:
         ra01:
@@ -48,40 +16,6 @@ all:
     eeVaServers:
       hosts:
         va01:
-          ansible_host: 
-    eeSignServers:
-      hosts:
-        ss01:
-          ansible_host: 
-    ceSignServers:
-      hosts:
-        cess01:
-          ansible_host: 
-    dbServers:
-      hosts:
-    ceServers:
-      hosts:
-        ce01:
-          ansible_host: 
-    conServers:
-      hosts:
-        docker02.solitude.skyrim:
-          ansible_host: 
-    pkiTlsCerts:
-      hosts:
-        pkiTlsEnrollmentCA:
-          ansible_host: 
-    pkiCsrCerts:
-      hosts:
-        pkiCsrEnrollmentCa:
-          ansible_host: 
-    ssTlsCerts:
-      hosts:
-        ssTlsEnrollmentCa:
-          ansible_host: 
-    ssCsrCerts:
-      hosts:
-        ssCsrEnrollmentCa:
           ansible_host: 
     httpdServers:
       children:
@@ -136,11 +70,6 @@ all:
       children:
         ceServers:   
     pkiServers:
-      children:
-        mariadbServers:
-        applicationServers:
-        httpdServers:
-    signServers:
       children:
         mariadbServers:
         applicationServers:

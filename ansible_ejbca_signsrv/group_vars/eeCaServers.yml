@@ -37,11 +37,11 @@ ejbca_src_dir_name: ejbca_ee_7_10_0_1
 ejbca_type: CA
 
 # EJBCA Upgrade version
-ejbca_upgrade_version: 7.11.0
+# ejbca_upgrade_version: 7.11.0
 # EJBCA Upgrade version URL to download the zip release file
-ejbca_upgrade_software_url: http://172.16.170.133:8080/ejbca/ejbca_ee_7_11_0.zip
+# ejbca_upgrade_software_url: http://172.16.170.133:8080/ejbca/ejbca_ee_7_11_0.zip
 # Directory name of EJBCA Upgrade version
-ejbca_upgrade_src_dir: ejbca_ee_7_11_0
+# ejbca_upgrade_src_dir: ejbca_ee_7_11_0
 
 # Variables to confgure the Widfly datasource for connecting to the applicable DB
 appsrv_datasources:
