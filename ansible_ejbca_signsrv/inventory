@@ -2,12 +2,12 @@
 
 all:
   hosts:
-    ejbca-rocky8-2.keyfactoriot.com
+    ejbca-alma9.keyfactoriot.com
   children:
     eeCaServers:
       hosts:
         ca01:
-          ansible_host: 10.10.12.16
+          ansible_host: 10.10.12.18
           ansible_user: keyfactor
     eeRaServers:
       hosts:

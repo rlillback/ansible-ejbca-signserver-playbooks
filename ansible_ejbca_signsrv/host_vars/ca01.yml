@@ -1,7 +1,7 @@
 ---
 
-hostname: ejbca-rocky8-2.keyfactoriot.com
-cname: ejbca-rocky8-2
+hostname: ejbca-alma9.keyfactoriot.com
+cname: ejbca-alma9
 
 # RAL Added this to include more debugging info
 print_debug_info: true
