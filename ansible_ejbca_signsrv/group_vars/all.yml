@@ -12,7 +12,7 @@ organizationNameShort: "{{ organizationName }}"
 organizationNameCRL: "{{ organizationName }}"
 organizationDomainName: keyfactoriot.com
 countryName: US
-superAdminCn: "KeyfactorIoT-SA"
+superAdminCn: "BYORoT-SA"
 sharedVarsLocation: ~/ansible/ansibleCacheDir
 
 # Deployment locations for all the servers
